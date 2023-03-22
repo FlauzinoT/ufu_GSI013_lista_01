@@ -12,3 +12,14 @@
 # V[4] = a + b;
 # b = b + 1;
 # }
+
+loop:
+    slt $t0, $s1, 32      # if (b < 32)
+    beq $t0, $zero, exit  # exit loop
+    add $s0, $s0, $s0     # a = a + a
+    add $t1, $s0, $s1     # t1 = a + b
+    add $t2, $s6, 16      # t2 = &V[4]
+    sw $t1, ($t2)         # V[4] = a + b
+    addi $s1, $s1, 1      # b = b + 1
+    j loop                # repete o loop
+exit:
