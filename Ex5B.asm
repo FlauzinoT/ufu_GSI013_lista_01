@@ -9,3 +9,12 @@
 # b)
 # while( V[0] <= a )
 # V[0] = V[0] + b;
+
+loop:
+    lw $t0, ($s6)         # t0 = V[0]
+    slt $t1, $t0, $s0     # if (V[0] <= a)
+    beq $t1, $zero, exit  # exit loop
+    add $t2, $t0, $s1     # t2 = V[0] + b
+    sw $t2, ($s6)         # V[0] = V[0] + b
+    j loop                # repete o loop
+exit:
